@@ -1,0 +1,39 @@
+# Aliases and functions I like to use when working with treasuremap
+
+alias kc=kubectl
+alias ship=airshipctl
+alias ku=kustomize
+alias watch="watch " # Can watch other aliases with this
+alias git-log='git log --date=short --pretty=format:"%ad %H %s"' # Useful oneline log
+ 
+source <(kubectl completion bash)
+complete -F __start_kubectl kc
+
+source <(airshipctl completion bash)
+complete -F __start_airshipctl ship
+
+export KUBECONFIG=~/.airship/kubeconfig
+export SOPS_IMPORT_PGP="$(cat ~/dev-key.asc)"
+export SOPS_PGP_FP="FBC7B9E2A4F9289AC0C1D4843D16CEE4A27381B4"
+
+# kstat <namespace> - View active pods in a namespace
+function kstat {
+    if [ -z "$1" ]; then
+        namespace="-A"
+    else
+        namespace="-n $1"
+    fi
+
+    watch "kubectl get pods $namespace | grep -v 'Completed'"
+}
+
+# kerr <namespace> - View pods that aren't Running or Complete
+function kerr { 
+    if [ -z "$1" ]; then
+        namespace="-A"
+    else
+        namespace="-n $1"
+    fi
+
+    watch "kubectl get pods $namespace | grep -v 'Running\|Completed'"
+}

@@ -1,0 +1,24 @@
+// VS Code workspace file with airship, treasuremap, and other resources
+{
+	"folders": [
+		{ "name": ".airship", "path": ".airship"},
+		{ "name": "airshipctl", "path": "airshipctl"},
+		{ "name": "treasuremap", "path": "treasuremap"},
+        // These charts can be retrieved by running charts.sh
+        { "name": "logging-operator", "path": "./helm-charts/banzaicloud/logging-operator/charts/logging-operator"},
+        { "name": "elasticsearch", "path": "./helm-charts/elastic/helm-charts/elasticsearch"},
+        { "name": "kibana", "path": "./helm-charts/elastic/helm-charts/kibana"},
+        { "name": "prometheus-elasticsearch-exporter", "path": "./helm-charts/prometheus-community/helm-charts/charts/prometheus-elasticsearch-exporter"},
+        { "name": "kube-prometheus-stack", "path": "./helm-charts/prometheus-community/helm-charts/charts/kube-prometheus-stack"},
+        { "name": "alertmanager", "path": "./helm-charts/prometheus-community/helm-charts/charts/alertmanager"},
+        { "name": "prometheus", "path": "./helm-charts/prometheus-community/helm-charts/charts/prometheus"},
+        { "name": "grafana", "path": "./helm-charts/grafana/helm-charts/charts/grafana"},
+        { "name": "loki", "path": "./helm-charts/grafana/helm-charts/charts/loki"},
+        { "name": "thanos", "path": "./helm-charts/banzaicloud/banzai-charts/thanos"},
+        { "name": "thanos-operator", "path": "./helm-charts/banzaicloud/thanos-operator/charts/thanos-operator"},
+        { "name": "minio", "path": "./helm-charts/minio/minio/minio"},
+	],
+    "settings": {}
+}
+
+
