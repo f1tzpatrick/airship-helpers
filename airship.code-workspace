@@ -1,24 +1,23 @@
 // VS Code workspace file with airship, treasuremap, and other resources
 {
 	"folders": [
-		{ "name": ".airship", "path": ".airship"},
-		{ "name": "airshipctl", "path": "airshipctl"},
-		{ "name": "treasuremap", "path": "treasuremap"},
+		{ "name": ".airship", "path": "/home/steven/.airship"},
+		{ "name": "airshipctl", "path": "/home/steven/airshipctl"},
+		{ "name": "treasuremap", "path": "/home/steven/treasuremap"},
+		{ "name": "airship-helpers", "path": "/home/steven/airship-helpers"},
         // These charts can be retrieved by running charts.sh
-        { "name": "logging-operator", "path": "./helm-charts/banzaicloud/logging-operator/charts/logging-operator"},
-        { "name": "elasticsearch", "path": "./helm-charts/elastic/helm-charts/elasticsearch"},
-        { "name": "kibana", "path": "./helm-charts/elastic/helm-charts/kibana"},
-        { "name": "prometheus-elasticsearch-exporter", "path": "./helm-charts/prometheus-community/helm-charts/charts/prometheus-elasticsearch-exporter"},
-        { "name": "kube-prometheus-stack", "path": "./helm-charts/prometheus-community/helm-charts/charts/kube-prometheus-stack"},
-        { "name": "alertmanager", "path": "./helm-charts/prometheus-community/helm-charts/charts/alertmanager"},
-        { "name": "prometheus", "path": "./helm-charts/prometheus-community/helm-charts/charts/prometheus"},
-        { "name": "grafana", "path": "./helm-charts/grafana/helm-charts/charts/grafana"},
-        { "name": "loki", "path": "./helm-charts/grafana/helm-charts/charts/loki"},
-        { "name": "thanos", "path": "./helm-charts/banzaicloud/banzai-charts/thanos"},
-        { "name": "thanos-operator", "path": "./helm-charts/banzaicloud/thanos-operator/charts/thanos-operator"},
-        { "name": "minio", "path": "./helm-charts/minio/minio/minio"},
+        { "name": "logging-operator", "path": "/home/steven/helm-charts/banzaicloud/logging-operator/charts/logging-operator"},
+        { "name": "elasticsearch", "path": "/home/steven/helm-charts/elastic/helm-charts/elasticsearch"},
+        { "name": "kibana", "path": "/home/steven/helm-charts/elastic/helm-charts/kibana"},
+        { "name": "prometheus-elasticsearch-exporter", "path": "/home/steven/helm-charts/prometheus-community/helm-charts/charts/prometheus-elasticsearch-exporter"},
+        { "name": "kube-prometheus-stack", "path": "/home/steven/helm-charts/prometheus-community/helm-charts/charts/kube-prometheus-stack"},
+        { "name": "alertmanager", "path": "/home/steven/helm-charts/prometheus-community/helm-charts/charts/alertmanager"},
+        { "name": "prometheus", "path": "/home/steven/helm-charts/prometheus-community/helm-charts/charts/prometheus"},
+        { "name": "grafana", "path": "/home/steven/helm-charts/grafana/helm-charts/charts/grafana"},
+        { "name": "loki", "path": "/home/steven/helm-charts/grafana/helm-charts/charts/loki"},
+        { "name": "thanos", "path": "/home/steven/helm-charts/banzaicloud/banzai-charts/thanos"},
+        { "name": "thanos-operator", "path": "/home/steven/helm-charts/banzaicloud/thanos-operator/charts/thanos-operator"},
+        { "name": "minio", "path": "/home/steven/helm-charts/minio/minio/minio"},
 	],
     "settings": {}
 }
-
-
