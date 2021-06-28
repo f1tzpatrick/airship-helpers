@@ -54,7 +54,7 @@ worker_vm_memory_mb: 7168
 worker_vm_vcpus: 2
 ```
 
-### 1. Gating Scripts
+### 1. Run the Gating Scripts
 
 ```
 cd ~/treasuremap
@@ -65,22 +65,23 @@ cd ~/treasuremap
 
 **Note:** 20_run_gate_runner.sh should complete after 45 to 90 minutes.
 
-### 2. Take ownership of the Environment
+### 2. Get set up to use the new cluster
 
 At this point airshipctl has created VMs and deployed kubernetes on top of them. There are some configuration updates we need to make in order to continue using this cluster.
 
 - Add your user to the docker and libvirt groups if you want
+- `chown` some directories that were created by the gate as root
 - Save the secrets that were generated during deployment
-- Take ownership of your airship config files and update your kubeconfig
+- Make updates your airshiptl and kube config files
 - Set the kubeconfig context to target-cluster
 
-The script `airship-helpers/take-ownership.sh` takes care of these tasks.
+The script `airship-helpers/post-deploy.sh` takes care of these tasks.
 
 Afterwards, you should now be able to interact with your deployment:
 
 - Confirm that the VMs are running:
   ```
-  steven@airship-2:$ sudo virsh list
+  steven@airship:$ sudo virsh list
   Id    Name                           State
   ----------------------------------------------------
   6     air-target-1                   running
@@ -89,21 +90,17 @@ Afterwards, you should now be able to interact with your deployment:
 
 - Confirm that kubectl is configured correctly:
   ```
-  steven@airship-2:$ kubectl get nodes
+  steven@airship:$ kubectl get nodes
   NAME     STATUS   ROLES    AGE   VERSION
   node01   Ready    master   39m   v1.18.6
   node03   Ready    worker   14m   v1.18.6
   ```
 
-### 3. Configure the Airship config file to use your local treasuremap repository
+### 3. Notes about the airshipctl config file
 
-As part of the deployment process, airshipctl generated a config file at `~/.airship/config`. We can update this file to improve parts of the development workflow.
+As part of the deployment process airshipctl generated a config file at `~/.airship/config`. We updated parts of this file in `airship-helpers/post-deploy.sh`, but the original was saved to `~/.airship/generated-config.yaml` for reference.
 
-The file `airship-helpers/treasuremap-config.yaml` contains the updated config file I use with my deployments. 
-
-> **Note**: You'll need to update the paths in this file to line up with your home directory.
-
-With those updates made, you can move on to step 4. For more detail about the airshipctl config file, read on!
+With those updates made, you can move on to step 4. For more detail about the airshipctl config file and the changes we made to it, read on!
 
 The file is YAML format and has three main sections:
 
@@ -124,7 +121,7 @@ The file is YAML format and has three main sections:
       managementConfiguration: treasuremap
       manifest: treasuremap
   ```
-- `manifests`: We will configure this section to utilize the local copies of the repositories we cloned earlier in step 3.
+- `manifests`: We will configure this section to utilize the local copies of the repositories we cloned earlier in part 1.
   ```
   manifests:
     treasuremap:
