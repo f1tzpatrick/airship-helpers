@@ -2,7 +2,7 @@
 
 # Download and register the development key in your environment
 
-if [ ~ -f ~/dey-key.asc ]; then
+if [ ! -f ~/dey-key.asc ]; then
     curl -fsSL -o ~/dev-key.asc https://raw.githubusercontent.com/mozilla/sops/master/pgp/sops_functional_tests_key.asc
 fi
 
