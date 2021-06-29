@@ -194,4 +194,23 @@ Treasuremap's `function` and `composite` and eventually `phase` manifests are us
 
 ## Part 4: Final set up for LMA development
 
-The LMA stack is assembled out of of several open source projects. These are distributed as helm charts, and we mange their deployments with flux `HelmRelease` documents. When tuning values structures, it can be handy to reference the chart source. The script `airship-helpers/charts.sh` will clone the github repositories of several of these projects. After cloning these repositories, you can use the VS Code Workspace file `airship-helpers/airship.code-workspace` to easily access the charts' source code.
+- The LMA stack is assembled out of of several open source projects. These are distributed as helm charts, and we mange their deployments with flux `HelmRelease` documents. When tuning values structures, it can be handy to reference the chart source. The script `airship-helpers/charts.sh` will clone the github repositories of several of these projects. After cloning these repositories, you can use the VS Code Workspace file `airship-helpers/airship.code-workspace` to easily access the charts' source code.
+
+- You can allow outside traffic to the `target-cluster` by opening the LIBVIRT_FWI iptables entry. The `target-cluster` vm network is 10.23.25.0/24, so we need to update that rule to allow NEW connections.
+  ```
+  steven@airship:~$ sudo iptables -L LIBVIRT_FWI --line-numbers
+  Chain LIBVIRT_FWI (1 references)
+  num  target     prot opt source               destination
+  1    REJECT     all  --  anywhere             anywhere             reject-with icmp-port-unreachable
+  2    ACCEPT     all  --  anywhere             10.23.25.0/24        ctstate NEW,RELATED,ESTABLISHED
+  3    REJECT     all  --  anywhere             anywhere             reject-with icmp-port-unreachable
+  4    ACCEPT     all  --  anywhere             192.168.122.0/24     ctstate RELATED,ESTABLISHED
+  5    REJECT     all  --  anywhere             anywhere             reject-with icmp-port-unreachable
+  ```
+  In this case it's rule #2, so this command updates the rule:
+
+    - `sudo iptables -R LIBVIRT_FWI 2 -d 10.23.25.0/24 -m conntrack --ctstate RELATED,ESTABLISHED,NEW -j ACCEPT`
+
+  You may also need to add a route to the `target-cluster` subnet via your VM host's IP, Eg:
+    - Windows: `New-NetRoute -DestinationPrefix "10.23.25.0/24" -InterfaceIndex 26 -NextHop 10.0.0.8`
+    - MacOS: `sudo route -n add -net 10.23.25.0/24 10.0.0.8`
